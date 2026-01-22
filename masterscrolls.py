@@ -81,9 +81,9 @@ def solve_hards_elites():
     # Calculate treasure trail points for elite scroll buying purposes
     tt_points = hards * 5.008 + elites * 10.016
 
-    # Add caskets to carrier including LotD 1% double chance
-    carrier["hard_caskets"] += hards * 1.01
-    carrier["elite_caskets"] += elites * 1.01
+    # Add caskets to carrier including LotD 0.1% double chance
+    carrier["hard_caskets"] += hards * 1.001
+    carrier["elite_caskets"] += elites * 1.001
 
     # Add clue solve counts to totals_dict
     totals_dict["total_hard_scrolls"] += hards
@@ -102,8 +102,8 @@ def solve_masters():
     # Calculate treasure trail points for elite scroll buying purposes
     tt_points = carrier["master_scrolls"] * 20.032
 
-    # Add caskets to carrier including LotD 1% double chance
-    carrier["master_caskets"] += carrier["master_scrolls"] * 1.01
+    # Add caskets to carrier including LotD 0.1% double chance
+    carrier["master_caskets"] += carrier["master_scrolls"] * 1.001
 
     # Zero-out master scrolls. Then buy elite scrolls and add bik time to all
     carrier["hard_scrolls"] += solve_time * bik_hard
@@ -148,3 +148,4 @@ while totals_dict["total_masters_caskets"] < master_casket_goal:
 
 print("Total Time (Hours): ",totals_dict["total_time"])
 pprint(totals_dict, sort_dicts=False)
+
