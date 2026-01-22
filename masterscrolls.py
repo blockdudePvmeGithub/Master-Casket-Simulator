@@ -1,14 +1,14 @@
 from pprint import pprint
 # Master Caskets Goal
-master_casket_goal = 150000
+master_casket_goal = 176550
 
 # Gather Rates /hour
 hard_gather = 21.6
 elite_gather = 17.9 * 0.99
 master_gather = 17.9 * 0.01
 
-bik_hard = 4.7
-bik_elite = 4.3
+bik_hard = 4.3
+bik_elite = 4.7
 bik_master = 0.17
 
 # Solve Rates /hour
@@ -45,6 +45,7 @@ total_time = 0.0
 totals_dict={
     # Note that masters are counting caskets, since that is our ultimate goal
     "gather_time": 0,
+    "total_time": 0,
     "total_hard_scrolls": 0,
     "total_elites_scrolls": 0,
     "total_masters_caskets": 0
@@ -59,20 +60,15 @@ carrier={
     "master_caskets": 0,
 }
 
-def gather_clues(gather_time, total_time, carrier, totals_dict):
+def gather_clues(gather_time):
     carrier["hard_scrolls"] += (hard_gather + bik_hard) * gather_time
     carrier["elite_scrolls"] += (elite_gather + bik_elite) * gather_time
     carrier["master_scrolls"] += (master_gather + bik_master) * gather_time
 
-    total_time += gather_time
+    totals_dict["total_time"] += gather_time
     totals_dict["gather_time"] += gather_time
 
-    return total_time, carrier, totals_dict
-
-def solve_hards_elites(total_time, carrier, totals_dict):
-    global total_hards
-    global total_elites
-
+def solve_hards_elites():
     hards = carrier["hard_scrolls"]
     elites = carrier["elite_scrolls"]
 
@@ -80,7 +76,7 @@ def solve_hards_elites(total_time, carrier, totals_dict):
     hard_solve_time = hards / hard_solve_rate
     elite_solve_time = elites / elite_solve_rate
     solve_time = hard_solve_time + elite_solve_time
-    total_time += solve_time
+    totals_dict["total_time"] += solve_time
 
     # Calculate treasure trail points for elite scroll buying purposes
     tt_points = hards * 5.008 + elites * 10.016
@@ -96,12 +92,10 @@ def solve_hards_elites(total_time, carrier, totals_dict):
     carrier["elite_scrolls"] = (solve_time * bik_elite) + (tt_points / 100)
     carrier["master_scrolls"] += solve_time * bik_master
 
-    return total_time, carrier, totals_dict
-
-def solve_masters(total_time, carrier, totals_dict):
+def solve_masters():
     # Calculate solve time
     solve_time = carrier["master_scrolls"] / master_solve_rate
-    total_time += solve_time
+    totals_dict["total_time"] += solve_time
 
     # Calculate treasure trail points for elite scroll buying purposes
     tt_points = carrier["master_scrolls"] * 20.032
@@ -115,9 +109,7 @@ def solve_masters(total_time, carrier, totals_dict):
     carrier["elite_scrolls"] += (solve_time * bik_elite) + (tt_points / 100)
     carrier["master_scrolls"] = solve_time * bik_master
 
-    return total_time, carrier, totals_dict
-
-def open_clues(carrier):
+def open_clues():
     # Open master caskets for osh elite caskets
     carrier["elite_caskets"] += carrier["master_caskets"] * osh_elite_per_master
 
@@ -141,18 +133,16 @@ def open_clues(carrier):
     carrier["elite_caskets"] = 0
     carrier["hard_caskets"] = 0
 
-    return carrier
-
 while totals_dict["total_masters_caskets"] < master_casket_goal:
-    total_time, carrier, totals_dict = gather_clues(1, total_time, carrier, totals_dict)
+    gather_clues(1)
     while carrier["elite_scrolls"] > 1:
-        total_time, carrier, totals_dict = solve_hards_elites(total_time, carrier, totals_dict)
-        open_clues(carrier)
+        solve_hards_elites()
+        open_clues()
         # pprint(carrier, sort_dicts=False)
         while carrier["master_scrolls"] > 1:
-            total_time, carrier, totals_dict = solve_masters(total_time, carrier, totals_dict)
-            open_clues(carrier)
+            solve_masters()
+            open_clues()
             # pprint(carrier, sort_dicts=False)
 
-print("Total Time: ",total_time)
+print("Total Time (Hours): ",totals_dict["total_time"])
 pprint(totals_dict, sort_dicts=False)
