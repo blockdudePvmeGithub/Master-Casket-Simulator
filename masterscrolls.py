@@ -65,6 +65,9 @@ def gather_clues(gather_time):
     carrier["elite_scrolls"] += (elite_gather + bik_elite) * gather_time
     carrier["master_scrolls"] += (master_gather + bik_master) * gather_time
 
+    totals_dict["total_hard_scrolls"] += carrier["hard_scrolls"]
+    totals_dict["total_elites_scrolls"] += carrier["elite_scrolls"]
+
     totals_dict["total_time"] += gather_time
     totals_dict["gather_time"] += gather_time
 
@@ -82,9 +85,7 @@ def solve_hards_elites():
     tt_points = hards * 5.008 + elites * 10.016
 
     # Add caskets to carrier including LotD 1% double chance
-    totals_dict["total_hard_scrolls"] += hards
     carrier["hard_caskets"] += hards * 1.01
-    totals_dict["total_elites_scrolls"] += elites
     carrier["elite_caskets"] += elites * 1.01
 
     # Zero-out hard and elite scrolls. Then buy elite scrolls and add bik time to all
