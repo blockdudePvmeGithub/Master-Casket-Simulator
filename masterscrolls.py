@@ -129,9 +129,9 @@ def open_clues():
     carrier["master_scrolls"] += easy_caskets * master_scroll_per_easy
 
     # Zero-out casket counts
-    carrier["master_caskets"] = 0
-    carrier["elite_caskets"] = 0
     carrier["hard_caskets"] = 0
+    carrier["elite_caskets"] = 0
+    carrier["master_caskets"] = 0
 
 while totals_dict["total_masters_caskets"] < master_casket_goal:
     gather_clues(1)
