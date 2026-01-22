@@ -100,8 +100,7 @@ def solve_masters():
     # Calculate treasure trail points for elite scroll buying purposes
     tt_points = carrier["master_scrolls"] * 20.032
 
-    # Add caskets to carrier & total master count including LotD 1% double chance
-    totals_dict["total_masters_caskets"] += carrier["master_scrolls"] * 1.01
+    # Add caskets to carrier including LotD 1% double chance
     carrier["master_caskets"] += carrier["master_scrolls"] * 1.01
 
     # Zero-out master scrolls. Then buy elite scrolls and add bik time to all
@@ -110,6 +109,7 @@ def solve_masters():
     carrier["master_scrolls"] = solve_time * bik_master
 
 def open_clues():
+    totals_dict["total_masters_caskets"] += carrier["master_caskets"]
     # Open master caskets for osh elite caskets
     carrier["elite_caskets"] += carrier["master_caskets"] * osh_elite_per_master
 
