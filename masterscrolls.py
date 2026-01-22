@@ -27,6 +27,12 @@ osh_medium_per_hard = (1/90) * (4/3)
 osh_hard_per_elite = (1/90) * (4/3)
 osh_elite_per_master = (1/100) * (4/3)
 
+# Assumptions
+# 1. Solving hards and elites is optimal
+# 2. Medium and easy scrolls should be ignored
+# 3. TT points are spent on elite scrolls instead of re-rolls
+# 3.5 This is roughly ~2x as efficient a use of points (source needed)
+
 #####################################
 # Touch below code at your own risk #
 #####################################
@@ -148,4 +154,5 @@ while totals_dict["total_masters_caskets"] < master_casket_goal:
 
 print("Total Time (Hours): ",totals_dict["total_time"])
 pprint(totals_dict, sort_dicts=False)
+
 
