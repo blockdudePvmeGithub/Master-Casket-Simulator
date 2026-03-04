@@ -13,8 +13,8 @@ bik_master = 0.17
 
 # Solve Rates /hour
 hard_solve_rate = 67
-elite_solve_rate = 36
-master_solve_rate = 35
+elite_solve_rate = 38
+master_solve_rate = 44
 
 # Master and OSH Rates /casket including rerolls
 master_scroll_per_easy = (1/50) * (4/3)
@@ -154,6 +154,7 @@ while totals_dict["total_masters_caskets"] < master_casket_goal:
 
 print("Total Time (Hours): ",totals_dict["total_time"])
 pprint(totals_dict, sort_dicts=False)
+
 
 
 
