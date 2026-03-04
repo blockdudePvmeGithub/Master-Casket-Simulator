@@ -12,7 +12,7 @@ bik_elite = 4.7
 bik_master = 0.17
 
 # Solve Rates /hour
-hard_solve_rate = 67
+hard_solve_rate = 66
 elite_solve_rate = 38
 master_solve_rate = 44
 
@@ -154,6 +154,7 @@ while totals_dict["total_masters_caskets"] < master_casket_goal:
 
 print("Total Time (Hours): ",totals_dict["total_time"])
 pprint(totals_dict, sort_dicts=False)
+
 
 
 
