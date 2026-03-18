@@ -3,9 +3,11 @@ from pprint import pprint
 master_casket_goal = 176550
 
 # Gather Rates /hour
-hard_gather = 21.6
-elite_gather = 17.9 * 0.99
-master_gather = 17.9 * 0.01
+pp_per_hour = 3100
+
+hard_gather = (pp_per_hour * 1/167) + (pp_per_hour * (1/2304 * 10/20))
+elite_gather = (pp_per_hour * 1/202) + (pp_per_hour * (1/2304 * 693/2000))
+master_gather = (pp_per_hour * 1/20000) + (pp_per_hour * (1/2304 * 7/2000))
 
 bik_hard = 4.3
 bik_elite = 4.7
